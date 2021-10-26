@@ -12,11 +12,13 @@ namespace AwesomePerformance.Test
             // Arrange
             IPool pool = new ArrayPool(new int[] { 1, 4, 45, 23, 23, 0, 1245, 2321, 5, 11, 0, 78 });
             int[] sequence = { 4, 5, 1, 43, 21 };
+
+            IPool poolWithRepetitions = new ArrayPool(new int[] { 1, 4, 45, 23, 23, 0, 1245, 2321, 5, 11, 0, 78 });
             int[] sequenceWithRepetitions = { 4, 4, 4, 4, 5, 1, 43, 21 };
 
             // Act
             bool contains = pool.Contains(sequence);
-            bool containsWithRepetitions = pool.Contains(sequenceWithRepetitions);
+            bool containsWithRepetitions = poolWithRepetitions.Contains(sequenceWithRepetitions);
 
             // Assert
             Assert.IsFalse(contains, "No repetitions");
@@ -27,13 +29,15 @@ namespace AwesomePerformance.Test
         public void When_PoolContainsSequence_True()
         {
             // Arrange
-            IPool pool = new ArrayPool(new int[] { 1, 4, 45, 23, 23, 0, 1245, 2321, 5, 11, 0, 78 });
+            IPool pool = new ArrayPool(new int[] { 1, 4, 45, 23, 23, 0, 1245, 4, 4, 4, 2321, 5, 11, 0, 78 });
             int[] sequence = { 4, 5, 1, 45, 23 };
+
+            IPool poolWithRepetitions = new ArrayPool(new int[] { 1, 4, 45, 23, 23, 0, 1245, 4, 4, 4, 2321, 5, 11, 0, 78 });
             int[] sequenceWithRepetitions = { 4, 4, 4, 4, 5, 1, 45, 23 };
 
             // Act
             bool contains = pool.Contains(sequence);
-            bool containsWithRepetitions = pool.Contains(sequenceWithRepetitions);
+            bool containsWithRepetitions = poolWithRepetitions.Contains(sequenceWithRepetitions);
 
             // Assert
             Assert.IsTrue(contains, "No repetitions");
@@ -46,11 +50,13 @@ namespace AwesomePerformance.Test
             // Arrange
             IPool pool = new ArrayPool(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 45, 23, 23, 0, 1245, 2321, 5, 11, 0, 78 });
             int[] sequence = { 4, 5, 1, 43, 21 };
+
+            IPool poolWithRepetitions = new ArrayPool(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 45, 23, 23, 0, 1245, 2321, 5, 11, 0, 78 });
             int[] sequenceWithRepetitions = { 4, 4, 4, 4, 5, 1, 43, 21 };
 
             // Act
             bool contains = pool.Contains(sequence);
-            bool containsWithRepetitions = pool.Contains(sequenceWithRepetitions);
+            bool containsWithRepetitions = poolWithRepetitions.Contains(sequenceWithRepetitions);
 
             // Assert
             Assert.IsFalse(contains, "No repetitions");
@@ -61,13 +67,15 @@ namespace AwesomePerformance.Test
         public void When_PoolWithRepetitionsContainsSequence_True()
         {
             // Arrange
-            IPool pool = new ArrayPool(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 45, 23, 23, 0, 1245, 2321, 5, 11, 0, 78 });
+            IPool pool = new ArrayPool(new int[] { 1, 1, 1, 7, 1, 1, 1, 4, 45, 23, 23, 0, 1245, 4, 4, 4, 2321, 5, 11, 0, 78 });
             int[] sequence = { 4, 5, 1, 45, 23 };
+
+            IPool poolWithRepetitions = new ArrayPool(new int[] { 1, 1, 1, 7, 1, 1, 1, 4, 45, 23, 23, 0, 1245, 4, 4, 4, 2321, 5, 11, 0, 78 });
             int[] sequenceWithRepetitions = { 4, 4, 4, 4, 5, 1, 45, 23 };
 
             // Act
             bool contains = pool.Contains(sequence);
-            bool containsWithRepetitions = pool.Contains(sequenceWithRepetitions);
+            bool containsWithRepetitions = poolWithRepetitions.Contains(sequenceWithRepetitions);
 
             // Assert
             Assert.IsTrue(contains, "No repetitions");

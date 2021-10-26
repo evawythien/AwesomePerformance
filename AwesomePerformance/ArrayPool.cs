@@ -5,16 +5,28 @@ namespace AwesomePerformance
 {
     public class ArrayPool : IPool
     {
-        private int[] pool;
+        private ItemPool[] pool;
 
         public ArrayPool(int[] pool)
         {
-            this.pool = pool;
+            this.pool = pool.GroupBy(n => n).Select(g => new ItemPool(g.Key, g.Count())).ToArray();
         }
 
         public bool Contains(int[] sequence)
         {
-            return sequence.All(d => pool.Contains(d));
+            foreach (var item in sequence)
+            {
+                var element = pool.FirstOrDefault(n => n.Number == item);
+                if (element == null)
+                    return false;
+
+                if (element.Repetitions <= 0)
+                    return false;
+
+                element.Repetitions = element.Repetitions - 1;
+            }
+
+            return true;
         }
     }
 }
